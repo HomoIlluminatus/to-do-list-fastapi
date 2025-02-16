@@ -33,6 +33,7 @@ def category_to_categorymodel(category: Category) -> CategoryModel:
 def categorymodel_to_category(category: CategoryModel) -> Category:
     return Category(
         id=category.id,
+        user_id=category.user_id,
         title=category.title,
         description=category.description,
         created_at=category.created_at,
