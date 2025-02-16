@@ -1,10 +1,27 @@
-from entities.entities import User
-from models.models import UserModel
+from entities.entities import User, Category, Task
+from models.models import UserModel, CategoryModel, TaskModel
 
 
 def user_to_usermodel(user: User) -> UserModel:
-    return UserModel(**user.user_dict)
+    return UserModel(
+        id=user.id,
+        name=user.name,
+        email=user.email,
+        hashed_password=user.hashed_password,
+        role=user.role,
+        created_at=user.created_at,
+        updated_at=user.updated_at
+    )
 
 
 def usermodel_to_user(user: UserModel) -> User:
-    return User(**user.user_dict)
+    return User(
+        id=user.id,
+        name=user.name,
+        email=user.email,
+        hashed_password=user.hashed_password,
+        role=user.role,
+        created_at=user.created_at,
+        updated_at=user.updated_at     
+    )
+    
