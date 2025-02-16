@@ -40,7 +40,8 @@ class UserRepository(AbstractUserRepository):
         return [usermodel_to_user(user) for user in queryset.scalars().all()]
     
     async def add(self, user: User) -> User:
-        await self._session.add(user_to_usermodel(user))
+        self._session.add(user_to_usermodel(user))
+        await self._session.commit()
         return user
     
     async def update(self, user: User) -> User:
