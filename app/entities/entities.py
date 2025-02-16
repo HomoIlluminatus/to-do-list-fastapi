@@ -1,12 +1,12 @@
 from abc import ABC
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 from typing import Optional
 from uuid import UUID, uuid4
 
 import bcrypt
 
-from .utils import Role, DcitUserMixin, TaskStatus
+from .utils import Role, TaskStatus
     
     
 @dataclass
@@ -23,10 +23,13 @@ class BaseEntity(ABC):
     
     def update_time_stemp(self) -> None:
         self.updated_at = datetime.now(timezone.utc)
+    
+    def to_dict(self):
+        return asdict(self)
 
 
 @dataclass
-class User(BaseEntity, DcitUserMixin):
+class User(BaseEntity):
     name: str
     email: str
     hashed_password: str
@@ -50,7 +53,6 @@ class User(BaseEntity, DcitUserMixin):
 @dataclass
 class Category(BaseEntity):
     user_id: UUID
-    task_id: UUID
     title: str
     description: Optional[str] = None
 
@@ -58,7 +60,6 @@ class Category(BaseEntity):
 @dataclass
 class Task(BaseEntity):
     user_id: UUID
-    category_id: UUID
     title: str
     description: Optional[str] = None
     deadline: Optional[datetime] = None
