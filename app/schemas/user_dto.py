@@ -14,4 +14,13 @@ class UserDTO(BaseModel, DcitUserMixin):
     role : Role
     created_at: datetime
     updated_at: datetime
-        
+
+
+class UserResponse(BaseModel):
+    id: UUID
+    name: str
+    email: EmailStr
+    role: Role
+    created_at: datetime
+    updated_at: datetime
+    
