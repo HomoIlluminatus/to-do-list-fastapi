@@ -12,7 +12,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import declarative_base, relationship
 
-from entities.utils import Role, DcitUserMixin, TaskStatus
+from entities.utils import Role, TaskStatus
 
 
 Base = declarative_base()
@@ -29,7 +29,7 @@ class BaseModel(Base):
                         onupdate=lambda: datetime.now(timezone.utc))
 
 
-class UserModel(BaseModel, DcitUserMixin):
+class UserModel(BaseModel):
     __tablename__ = 'users'
     
     name = Column(String(100), nullable=False)
