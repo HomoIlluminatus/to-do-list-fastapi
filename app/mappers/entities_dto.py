@@ -1,4 +1,5 @@
-from entities.entities import User
+from entities.entities import Category, User
+from schemas.category_dto import CategoryResponse
 from schemas.user_dto import UserDTO, UserResponse
 
 
@@ -26,5 +27,15 @@ def get_user_response(user: User) -> UserResponse:
         role=user.role,
         created_at=user.created_at,
         updated_at=user.updated_at
+    )
+    
+
+def get_category_response(category: Category) -> CategoryResponse:
+    return CategoryResponse(
+        id=category.id,
+        title=category.title,
+        description=category.description,
+        created_at=category.created_at,
+        updated_at=category.updated_at
     )
     
