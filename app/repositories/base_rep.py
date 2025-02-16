@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, TypeVar, Generic
+from typing import List, Optional, TypeVar, Generic
 from uuid import UUID
 
 
@@ -8,7 +8,7 @@ T = TypeVar("T")
 
 class AbstractBaseRepository(ABC, Generic[T]):
     @abstractmethod
-    async def get_by_id(self, entity_id: UUID) -> T:
+    async def get_by_id(self, entity_id: UUID) -> Optional[T]:
         ...
         
     @abstractmethod
