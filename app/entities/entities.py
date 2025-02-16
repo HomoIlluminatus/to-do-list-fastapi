@@ -1,8 +1,9 @@
 from abc import ABC
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Dict, Union
 from uuid import UUID, uuid4
+
+import bcrypt
 
 from .utils import Role, DcitUserMixin
     
@@ -35,4 +36,12 @@ class User(BaseEntity, DcitUserMixin):
     
     def validate(self) -> None:
         ...
-        
+    
+    @staticmethod
+    def hash_password(password: str) -> str:
+        return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+    
+    @staticmethod
+    def verify_password(password: str, hashed_password: str) -> bool:
+        return bcrypt.checkpw(password.encode(), hashed_password.encode())
+    
