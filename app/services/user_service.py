@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-import hashlib
 from typing import List
 from uuid import UUID
 
@@ -68,7 +67,7 @@ class UserService:
             User(
                 name=name,
                 email=email,
-                hashed_password=hashlib.sha256(password),
+                hashed_password=User.hash_password(password),
                 role=role
             )
         )
