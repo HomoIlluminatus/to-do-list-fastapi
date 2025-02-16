@@ -25,3 +25,17 @@ def usermodel_to_user(user: UserModel) -> User:
         updated_at=user.updated_at     
     )
     
+
+def category_to_categorymodel(category: Category) -> CategoryModel:
+    return CategoryModel(**category.to_dict())
+
+
+def categorymodel_to_category(category: CategoryModel) -> Category:
+    return Category(
+        id=category.id,
+        title=category.title,
+        description=category.description,
+        created_at=category.created_at,
+        updated_at=category.updated_at
+    )
+    
