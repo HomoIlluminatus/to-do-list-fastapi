@@ -3,10 +3,10 @@ from uuid import UUID
 
 from pydantic import BaseModel, EmailStr
 
-from entities.utils import Role, DcitUserMixin
+from entities.utils import Role
 
 
-class UserDTO(BaseModel, DcitUserMixin):
+class UserDTO(BaseModel):
     id: UUID
     name: str
     email: EmailStr
