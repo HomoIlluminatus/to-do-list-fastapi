@@ -1,11 +1,12 @@
 from abc import ABC
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
+from typing import Optional
 from uuid import UUID, uuid4
 
 import bcrypt
 
-from .utils import Role, DcitUserMixin
+from .utils import Role, DcitUserMixin, TaskStatus
     
     
 @dataclass
@@ -44,4 +45,22 @@ class User(BaseEntity, DcitUserMixin):
     @staticmethod
     def verify_password(password: str, hashed_password: str) -> bool:
         return bcrypt.checkpw(password.encode(), hashed_password.encode())
+
+
+@dataclass
+class Category(BaseEntity):
+    user_id: UUID
+    task_id: UUID
+    title: str
+    description: Optional[str] = None
+
+
+@dataclass
+class Task(BaseEntity):
+    user_id: UUID
+    category_id: UUID
+    title: str
+    description: Optional[str] = None
+    deadline: Optional[datetime] = None
+    status: TaskStatus = TaskStatus.WAITING
     
